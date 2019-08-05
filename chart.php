@@ -41,18 +41,22 @@
             foreach(explode("\n", $content) as $line) { //line
                 $lineExplode = explode(",", $line);
                 if(isset($lineExplode[0]) && isset($lineExplode[1]) && isset($lineExplode[2]) && isset($lineExplode[3]) && isset($lineExplode[4]) && isset($lineExplode[5]) && isset($lineExplode[6]) && isset($lineExplode[7]) && isset($lineExplode[8])) {
-                    $ACC_X = $ACC_X . $lineExplode[0] . ",";
-                    $ACC_Y = $ACC_Y . $lineExplode[1] . ",";
-                    $ACC_Z = $ACC_Z . $lineExplode[2] . ",";
-                    $GYRO_X = $GYRO_X . $lineExplode[3] . ",";
-                    $GYRO_Y = $GYRO_Y . $lineExplode[4] . ",";
-                    $GYRO_Z = $GYRO_Z . $lineExplode[5] . ",";
-                    $EULER_X = $EULER_X . $lineExplode[6] . ",";
-                    $EULER_Y = $EULER_Y . $lineExplode[7] . ",";
-                    $EULER_Z = $EULER_Z . $lineExplode[8] . ",";
+                    if ($lineExplode[0] > -1000 && $lineExplode[0] < 1000 && $lineExplode[1] > -1000 && $lineExplode[1] < 1000 && $lineExplode[2] > -1000 && $lineExplode[2] < 1000 &&
+                    $lineExplode[3] > -1000 && $lineExplode[3] < 1000 && $lineExplode[4] > -1000 && $lineExplode[4] < 1000 && $lineExplode[5] > -1000 && $lineExplode[5] < 1000 &&
+                    $lineExplode[6] > -1000 && $lineExplode[6] < 1000 && $lineExplode[7] > -1000 && $lineExplode[7] < 1000 && $lineExplode[8] > -1000 && $lineExplode[8] < 1000) {
+                        $ACC_X = $ACC_X . $lineExplode[0] . ",";
+                        $ACC_Y = $ACC_Y . $lineExplode[1] . ",";
+                        $ACC_Z = $ACC_Z . $lineExplode[2] . ",";
+                        $GYRO_X = $GYRO_X . $lineExplode[3] . ",";
+                        $GYRO_Y = $GYRO_Y . $lineExplode[4] . ",";
+                        $GYRO_Z = $GYRO_Z . $lineExplode[5] . ",";
+                        $EULER_X = $EULER_X . $lineExplode[6] . ",";
+                        $EULER_Y = $EULER_Y . $lineExplode[7] . ",";
+                        $EULER_Z = $EULER_Z . $lineExplode[8] . ",";
 
-                $X_AXIS_NUMBERS = $X_AXIS_NUMBERS . $x . ",";
-                $x = $x + 1;
+                        $X_AXIS_NUMBERS = $X_AXIS_NUMBERS . $x . ",";
+                        $x = $x + 1;
+                    }
                 }
             }
             //Deleting last comma from strings
