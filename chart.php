@@ -43,7 +43,7 @@
                 if(isset($lineExplode[0]) && isset($lineExplode[1]) && isset($lineExplode[2]) && isset($lineExplode[3]) && isset($lineExplode[4]) && isset($lineExplode[5]) && isset($lineExplode[6]) && isset($lineExplode[7]) && isset($lineExplode[8])) {
                     if ($lineExplode[0] > -1000 && $lineExplode[0] < 1000 && $lineExplode[1] > -1000 && $lineExplode[1] < 1000 && $lineExplode[2] > -1000 && $lineExplode[2] < 1000 &&
                     $lineExplode[3] > -1000 && $lineExplode[3] < 1000 && $lineExplode[4] > -1000 && $lineExplode[4] < 1000 && $lineExplode[5] > -1000 && $lineExplode[5] < 1000 &&
-                    $lineExplode[6] > -1000 && $lineExplode[6] < 1000 && $lineExplode[7] > -1000 && $lineExplode[7] < 1000 && $lineExplode[8] > -1000 && $lineExplode[8] < 1000) {
+                    $lineExplode[6] > -100 && $lineExplode[6] < 100 && $lineExplode[7] > -100 && $lineExplode[7] < 100 && $lineExplode[8] > -100 && $lineExplode[8] < 100) {
                         $ACC_X = $ACC_X . $lineExplode[0] . ",";
                         $ACC_Y = $ACC_Y . $lineExplode[1] . ",";
                         $ACC_Z = $ACC_Z . $lineExplode[2] . ",";
