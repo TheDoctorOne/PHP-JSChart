@@ -5,9 +5,11 @@
                 <?php
                 $fileList = scandir("/xampp/htdocs/ChartJS/data");
                 foreach($fileList as $file) {
-                    echo "<span style=\"cursor:pointer;\" onclick=\"changePage('" . $file . "',this)\">";
-                    echo $file;
-                    echo "</span><br>";
+                    if(!($file == "." || $file == "..")){
+                        echo "<span style=\"cursor:pointer;\" onclick=\"changePage('" . $file . "',this)\">";
+                        echo $file;
+                        echo "</span><br>";
+                    }
                 }
                 ?>
             </td>
