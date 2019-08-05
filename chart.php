@@ -227,21 +227,16 @@
 			});
 		};
 		document.getElementById('ACC_BUT').addEventListener('click', function() {
+            document.getElementById('canvas').outerHTML = "<canvas id=\"canvas\"></canvas>";
             loadGraph(ACC,"ACC");
-
-			window.myLine.update();
 		});
         document.getElementById('GYRO_BUT').addEventListener('click', function() {
-			selected = GYRO;
+            document.getElementById('canvas').outerHTML = "<canvas id=\"canvas\"></canvas>";
             loadGraph(GYRO,"GYRO");
-
-			window.myLine.update();
 		});
         document.getElementById('EULER_BUT').addEventListener('click', function() {
-			selected = EULER;
+            document.getElementById('canvas').outerHTML = "<canvas id=\"canvas\"></canvas>";
             loadGraph(EULER,"EULER");
-
-			window.myLine.update();
 		});
     </script>
 </html>
