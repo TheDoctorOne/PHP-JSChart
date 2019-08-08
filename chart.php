@@ -1,12 +1,5 @@
 <html>
-    <script src="Chart.min.js"></script>
-    <style>
-	canvas {
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-	}
-	</style>
+    <script src="dygraph.js"></script> 
     <body>
         <?php
         if( isset($_GET['name']) ) {
@@ -79,168 +72,92 @@
         <button id="ACC_BUT">ACC</button>
         <button id="GYRO_BUT">GYRO</button>
         <button id="EULER_BUT">EULER</button>
-        <div style="width:100%;">
-            <canvas id="canvas"></canvas>
-        </div>
+        <button id="ZOOM-OUT" style="float:right;">ZOOM CLEAR</button>
+        <div id="graphdiv" style="width:100%;height"></div>
         
     </body>
     <script>
-        var ACC = {
-			labels: [<?php echo $X_AXIS_NUMBERS; ?>],
-			datasets: [{
-				label: 'X',
-				borderColor: "red",
-				backgroundColor: "red",
-				fill: false,
-				data: [
-                    <?php 
-                    echo $ACC_X;
-                    ?>
-				],
-				yAxisID: 'y-axis-1',
-			}, {
-				label: 'Y',
-				borderColor: "blue",
-				backgroundColor: "blue",
-				fill: false,
-                data: [
-                    <?php 
-                    echo $ACC_Y;
-                    ?>
-				],
-				yAxisID: 'y-axis-2'
-			}, {
-				label: 'Z',
-				borderColor: "green",
-				backgroundColor: "green",
-				fill: false,
-				data: [
-                    <?php 
-                    echo $ACC_Z;
-                    ?>
-				],
-				yAxisID: 'y-axis-3'
-			}]
-		};
-        var GYRO = {
-			labels: [<?php echo $X_AXIS_NUMBERS; ?>],
-			datasets: [{
-				label: 'X',
-				borderColor: "red",
-				backgroundColor: "red",
-				fill: false,
-				data: [
-                    <?php 
-                    echo $GYRO_X;
-                    ?>
-				],
-				yAxisID: 'y-axis-1',
-			}, {
-				label: 'Y',
-				borderColor: "blue",
-				backgroundColor: "blue",
-				fill: false,
-                data: [
-                    <?php 
-                    echo $GYRO_Y;
-                    ?>
-				],
-				yAxisID: 'y-axis-2'
-			}, {
-				label: 'Z',
-				borderColor: "green",
-				backgroundColor: "green",
-				fill: false,
-				data: [
-                    <?php 
-                    echo $GYRO_Z;
-                    ?>
-				],
-				yAxisID: 'y-axis-3'
-			}]
-		};
-        var EULER = {
-			labels: [<?php echo $X_AXIS_NUMBERS; ?>],
-			datasets: [{
-				label: 'X',
-				borderColor: "red",
-				backgroundColor: "red",
-				fill: false,
-				data: [
-                    <?php 
-                    echo $EULER_X;
-                    ?>
-				],
-				yAxisID: 'y-axis-1',
-			}, {
-				label: 'Y',
-				borderColor: "blue",
-				backgroundColor: "blue",
-				fill: false,
-                data: [
-                    <?php 
-                    echo $EULER_Y;
-                    ?>
-				],
-				yAxisID: 'y-axis-2'
-			}, {
-				label: 'Z',
-				borderColor: "green",
-				backgroundColor: "green",
-				fill: false,
-				data: [
-                    <?php 
-                    echo $EULER_Z;
-                    ?>
-				],
-				yAxisID: 'y-axis-3'
-			}]
-		};
-        
-        function loadGraph(chartData, chartTitle) {
-			var ctx = document.getElementById('canvas').getContext('2d');
-			window.myLine = Chart.Line(ctx, {
-				data: chartData,
-				options: {
-					responsive: true,
-					hoverMode: 'index',
-					stacked: false,
-					title: {
-						display: true,
-						text: chartTitle
-					},
-					scales: {
-						yAxes: [{
-							type: 'linear',
-							display: true,
-							position: 'left',
-							id: 'y-axis-1',
-						}, {
-							type: 'linear', 
-							display: true,
-							position: 'right',
-							id: 'y-axis-2',
-						}, {
-							type: 'linear', 
-							display: true,
-							position: 'right',
-							id: 'y-axis-3',
-						}],
-					}
-				}
-			});
-		};
+        function translateGraphToACC() {
+            g = new Dygraph(
+            // containing div
+            document.getElementById("graphdiv"),
+            <?php 
+            $ACC_X_EXPLODE = explode(",",$ACC_X);
+            $ACC_Y_EXPLODE = explode(",",$ACC_Y);
+            $ACC_Z_EXPLODE = explode(",",$ACC_Z);
+            echo "\"ACC,X,Y,Z\\n\" + \n";
+            for($i=0; $i < $x ; $i = $i + 1) {
+                echo "\"" . $i . "," . $ACC_X_EXPLODE[$i] . "," . $ACC_Y_EXPLODE[$i] . "," . $ACC_Z_EXPLODE[$i];
+                echo "\\n" . "\"" . "+" . "\n";
+            }
+            echo "\"\"";
+            ?>
+
+            );
+        }
+        function translateGraphToGYRO() {
+            g = new Dygraph(
+            // containing div
+            document.getElementById("graphdiv"),
+            <?php 
+            $ACC_X_EXPLODE = explode(",",$GYRO_X);
+            $ACC_Y_EXPLODE = explode(",",$GYRO_Y);
+            $ACC_Z_EXPLODE = explode(",",$GYRO_Z);
+            echo "\"ACC,X,Y,Z\\n\" + \n";
+            for($i=0; $i < $x ; $i = $i + 1) {
+                echo "\"" . $i . "," . $ACC_X_EXPLODE[$i] . "," . $ACC_Y_EXPLODE[$i] . "," . $ACC_Z_EXPLODE[$i];
+                echo "\\n" . "\"" . "+" . "\n";
+            }
+            echo "\"\"";
+            ?>
+
+            );
+        }
+        function translateGraphToEULER() {
+            g = new Dygraph(
+            // containing div
+            document.getElementById("graphdiv"),
+            <?php 
+            $ACC_X_EXPLODE = explode(",",$EULER_X);
+            $ACC_Y_EXPLODE = explode(",",$EULER_Y);
+            $ACC_Z_EXPLODE = explode(",",$EULER_Z);
+            echo "\"ACC,X,Y,Z\\n\" + \n";
+            for($i=0; $i < $x ; $i = $i + 1) {
+                echo "\"" . $i . "," . $ACC_X_EXPLODE[$i] . "," . $ACC_Y_EXPLODE[$i] . "," . $ACC_Z_EXPLODE[$i];
+                echo "\\n" . "\"" . "+" . "\n";
+            }
+            echo "\"\"";
+            ?>
+
+            );
+        }
+        translateGraphToACC();
+        var last = "ACC";
+
 		document.getElementById('ACC_BUT').addEventListener('click', function() {
-            document.getElementById('canvas').outerHTML = "<canvas id=\"canvas\"></canvas>";
-            loadGraph(ACC,"ACC");
+            document.getElementById('graphdiv').outerHTML = "<div id=\"graphdiv\" style=\"width:100%;height\"></div>";
+            last = "ACC";
+            translateGraphToACC();
 		});
         document.getElementById('GYRO_BUT').addEventListener('click', function() {
-            document.getElementById('canvas').outerHTML = "<canvas id=\"canvas\"></canvas>";
-            loadGraph(GYRO,"GYRO");
+            document.getElementById('graphdiv').outerHTML = "<div id=\"graphdiv\" style=\"width:100%;height\"></div>";
+            last = "GYRO";
+            translateGraphToGYRO();
 		});
         document.getElementById('EULER_BUT').addEventListener('click', function() {
-            document.getElementById('canvas').outerHTML = "<canvas id=\"canvas\"></canvas>";
-            loadGraph(EULER,"EULER");
+            document.getElementById('graphdiv').outerHTML = "<div id=\"graphdiv\" style=\"width:100%;height\"></div>";
+            last = "EULER";
+            translateGraphToEULER();
+		});
+        document.getElementById('ZOOM-OUT').addEventListener('click', function() {
+            document.getElementById('graphdiv').outerHTML = "<div id=\"graphdiv\" style=\"width:100%;height\"></div>";
+            if(last == "ACC") {
+                translateGraphToACC();
+            } else if(last == "GYRO") {
+                translateGraphToGYRO();
+            } else if(last == "EULER") {
+                translateGraphToEULER();
+            }
 		});
     </script>
 </html>
